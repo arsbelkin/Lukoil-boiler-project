@@ -44,4 +44,4 @@ git push
 
 6. Создается `Pull Request` в ветку `dev`
 
-7. Далее создается `Pull Requests` в ветку `main`
+7. Далее создается `Pull Request` в ветку `main`
