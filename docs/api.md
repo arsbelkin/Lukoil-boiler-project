@@ -15,6 +15,8 @@ Response example:
 }
 ```
 
+<br>
+<br>
 
 - Получение данных `GET /api/v1/data`
 
@@ -40,6 +42,8 @@ Response example:
 }
 ```
 
+<br>
+<br>
 
 - Установка значений `POST /api/v1/data`
 
@@ -61,6 +65,8 @@ Request example:
 
 Response example: *statusCode*
 
+<br>
+<br>
 
 - График `GET /api/v1/graph`
 
