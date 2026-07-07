@@ -4,7 +4,7 @@ from opc_tags import TAGS
 
 
 class OPCBoilerServer:
-    def __init__(self, endpoint="opc.tcp://0.0.0.0:4840/freeopcua/server/"):
+    def __init__(self, endpoint="opc.tcp://0.0.0.0:4840/freeopcua/server/"):    #функция для определения сервера
         self.server = Server()                          
         self.server.set_endpoint(endpoint)              
         uri = "http://example.org/boiler/"
@@ -12,7 +12,7 @@ class OPCBoilerServer:
         self.nodes = {}
         self._setup_nodes()
 
-    def _setup_nodes(self):
+    def _setup_nodes(self):     #функция для добавления объектов внутрь бойлера 
         boiler = self.server.nodes.objects.add_object(self.idx, "Boiler")
         for name, props in TAGS.items():
             node = boiler.add_variable(self.idx, name, props["initial"])
@@ -20,14 +20,14 @@ class OPCBoilerServer:
                 node.set_writable()
             self.nodes[name] = node
 
-    def start(self):
+    def start(self):    #функция старта сервера 
         self.server.start()                             
 
-    def stop(self):
+    def stop(self):     #ыункция останвоки сервера 
         self.server.stop()
 
-    def get_value(self, name):
+    def get_value(self, name):   #функция для получения значения определенного датчика из бойлера
         return self.nodes[name].read_value()
 
-    def set_value(self, name, value):
+    def set_value(self, name, value):     #функция для изменения значения, например поставить кран с 0.5 на 0.7
         self.nodes[name].write_value(value)
