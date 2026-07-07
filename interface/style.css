@@ -1,0 +1,425 @@
+/* ===== БАЗОВЫЕ ПЕРЕМЕННЫЕ (дизайн-система из ui.md) ===== */
+:root {
+    --color-hot: #e74c3c;
+    --color-cold: #3498db;
+    --color-mixed: #9b59b6;
+    --color-bg: #f5f5f5;
+    --color-accent: #2c3e50;
+    --color-text: #2c3e50;
+    --color-card: #ffffff;
+    --color-border: #dfe6e9;
+    --color-success: #27ae60;
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Inter', 'Roboto', system-ui, sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text);
+    min-height: 100vh;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* ===== HEADER ===== */
+.header {
+    background: var(--color-accent);
+    color: white;
+    padding: 16px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow-md);
+}
+.header h1 { font-size: 24px; font-weight: 600; }
+.status { font-size: 14px; opacity: 0.9; }
+.status.connected { color: #2ecc71; }
+.status.error { color: #e74c3c; }
+
+/* ===== DASHBOARD ===== */
+.dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr 1fr;
+    gap: 24px;
+    padding: 24px;
+    max-width: 1600px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+/* ===== КАРТОЧКИ КЛАПАНОВ ===== */
+.valves-column { display: flex; flex-direction: column; gap: 20px; }
+
+.valve-card {
+    background: var(--color-card);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    border-left: 5px solid var(--color-accent);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.valve-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.valve-card.hot { border-left-color: var(--color-hot); }
+.valve-card.cold { border-left-color: var(--color-cold); }
+.valve-card.out { border-left-color: var(--color-mixed); }
+
+.valve-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 12px;
+}
+.valve-icon { width: 80px; height: 80px; }
+.valve-body {
+    fill: #ecf0f1;
+    stroke: var(--color-accent);
+    stroke-width: 3;
+}
+.valve-handle {
+    stroke: var(--color-accent);
+    stroke-width: 4;
+    stroke-linecap: round;
+    transition: transform var(--transition);
+    transform-origin: 40px 40px;
+}
+.valve-percent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--color-accent);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.valve-info h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: var(--color-accent);
+}
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 14px;
+    border-bottom: 1px dashed var(--color-border);
+}
+.info-row:last-of-type { border-bottom: none; }
+.info-row .label { color: #7f8c8d; }
+.info-row .value { font-weight: 600; color: var(--color-text); }
+
+.buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+}
+.btn-edit {
+    flex: 1;
+    padding: 8px 12px;
+    background: var(--color-accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    font-weight: 500;
+}
+.btn-edit:hover { background: #34495e; }
+.btn-edit:active { transform: scale(0.97); }
+
+/* ===== БОЙЛЕР ===== */
+.boiler-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.boiler-container {
+    background: var(--color-card);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow-md);
+    width: 100%;
+    max-width: 500px;
+}
+.boiler-svg { width: 100%; height: auto; display: block; }
+
+/* Трубы */
+.pipe {
+    fill: none;
+    stroke: #bdc3c7;
+    stroke-width: 14;
+    stroke-linecap: round;
+}
+.pipe-flow {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 12 12;
+    opacity: 0.9;
+}
+.hot-flow {
+    stroke: var(--color-hot);
+    animation: flow 1s linear infinite;
+}
+.cold-flow {
+    stroke: var(--color-cold);
+    animation: flow 1.2s linear infinite;
+}
+.out-flow {
+    stroke: var(--color-mixed);
+    animation: flow 1s linear infinite;
+}
+@keyframes flow {
+    from { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: -24; }
+}
+
+
+/* Бак */
+.tank {
+    fill: #ecf0f1;
+    stroke: var(--color-accent);
+    stroke-width: 4;
+}
+.water {
+    fill: var(--color-mixed);
+    transition: height var(--transition), y var(--transition), fill var(--transition);
+}
+.wave {
+    fill: rgba(255,255,255,0.3);
+    transition: d var(--transition);
+}
+
+/* Термометр */
+.thermometer {
+    fill: #ecf0f1;
+    stroke: var(--color-accent);
+    stroke-width: 2;
+}
+.thermo-fill {
+    fill: var(--color-hot);
+    transition: height var(--transition), y var(--transition), fill var(--transition);
+}
+.thermo-bulb {
+    fill: var(--color-hot);
+    stroke: var(--color-accent);
+    stroke-width: 2;
+    transition: fill var(--transition);
+}
+.temp-text {
+    font-size: 18px;
+    font-weight: 700;
+    fill: var(--color-accent);
+}
+
+/* Уровень сбоку */
+.level-bar-bg {
+    fill: #ecf0f1;
+    stroke: var(--color-accent);
+    stroke-width: 2;
+}
+.level-bar-fill {
+    fill: var(--color-cold);
+    transition: height var(--transition), y var(--transition);
+}
+.level-text {
+    font-size: 14px;
+    font-weight: 600;
+    fill: var(--color-accent);
+}
+
+/* ===== МОДАЛЬНОЕ ОКНО ===== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s;
+}
+.modal-overlay.active { display: flex; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.modal {
+    background: white;
+    border-radius: var(--radius);
+    width: 90%;
+    max-width: 420px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    overflow: hidden;
+    animation: slideUp 0.3s;
+}
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+.modal-header {
+    background: var(--color-accent);
+    color: white;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.modal-header h2 { font-size: 18px; }
+.modal-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 1;
+}
+.modal-body { padding: 24px 20px; }
+
+.slider-container { margin-bottom: 12px; }
+#modalSlider {
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: #ecf0f1;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+#modalSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transition: transform 0.1s;
+}
+#modalSlider::-webkit-slider-thumb:hover { transform: scale(1.1); }
+#modalSlider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    cursor: pointer;
+    border: none;
+}
+.slider-value {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-top: 16px;
+}
+.slider-range {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #7f8c8d;
+}
+
+.modal-footer {
+    padding: 16px 20px;
+    background: #f8f9fa;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.btn-cancel { background: #ecf0f1; color: var(--color-text); }
+.btn-cancel:hover { background: #dfe6e9; }
+.btn-apply { background: var(--color-success); color: white; }
+.btn-apply:hover { background: #229954; }
+
+/* ===== АДАПТИВНОСТЬ ===== */
+@media (max-width: 1023px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+    .valves-column {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .valve-card { flex: 1; min-width: 280px; max-width: 400px; }
+    .boiler-section { order: -1; }
+}
+@media (max-width: 767px) {
+    .header h1 { font-size: 18px; }
+    .dashboard { padding: 12px; gap: 16px; }
+    .valve-card { min-width: 100%; }
+    .buttons { flex-direction: column; }
+    .btn-edit { width: 100%; }
+}
+
+/* ===== ПРЕДУПРЕЖДЕНИЕ О КРИТИЧЕСКОМ УРОВНЕ ===== */
+.warning-banner {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(231, 76, 60, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 10;
+    white-space: nowrap;
+}
+
+.warning-banner.active {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+    animation: pulseWarning 1.5s ease-in-out infinite;
+}
+
+.warning-icon {
+    font-size: 20px;
+    animation: shake 0.5s ease-in-out infinite;
+}
+
+@keyframes pulseWarning {
+    0%, 100% { box-shadow: 0 4px 20px rgba(231, 76, 60, 0.5); }
+    50% { box-shadow: 0 4px 30px rgba(231, 76, 60, 0.9); }
+}
+
+.boiler-section {
+    position: relative; /* нужно для позиционирования баннера */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 767px) {
+    .warning-banner {
+        font-size: 13px;
+        padding: 10px 16px;
+    }
+}
