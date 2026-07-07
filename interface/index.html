@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Модель бойлера — SCADA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <h1>🔥 Модель бойлера</h1>
+        <span class="status" id="connectionStatus">● Подключение...</span>
+    </header>
+
+    <main class="dashboard">
+        <!-- ЛЕВАЯ КОЛОНКА: ВХОДНЫЕ КЛАПАНЫ -->
+        <section class="valves-column left">
+            <div class="valve-card hot" data-valve="valveHot">
+                <div class="valve-visual">
+                    <svg viewBox="0 0 80 80" class="valve-icon">
+                        <circle cx="40" cy="40" r="30" class="valve-body"/>
+                        <line x1="40" y1="10" x2="40" y2="70" class="valve-handle"/>
+                        <line x1="10" y1="40" x2="70" y2="40" class="valve-handle"/>
+                    </svg>
+                    <div class="valve-percent" id="valveHot-percent">50%</div>
+                </div>
+                <div class="valve-info">
+                    <h3>Горячий вход</h3>
+                    <div class="info-row">
+                        <span class="label">Открытие:</span>
+                        <span class="value" id="valveHot-value">50%</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Температура:</span>
+                        <span class="value" id="inputHotTemp-value">85 °C</span>
+                    </div>
+                    <div class="buttons">
+                        <button class="btn-edit" data-target="valveHot" data-type="percent">Изменить %</button>
+                        <!-- <button class="btn-edit" data-target="inputHotTemp" data-type="temp">Изменить T°</button> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="valve-card cold" data-valve="valveCold">
+                <div class="valve-visual">
+                    <svg viewBox="0 0 80 80" class="valve-icon">
+                        <circle cx="40" cy="40" r="30" class="valve-body"/>
+                        <line x1="40" y1="10" x2="40" y2="70" class="valve-handle"/>
+                        <line x1="10" y1="40" x2="70" y2="40" class="valve-handle"/>
+                    </svg>
+                    <div class="valve-percent" id="valveCold-percent">50%</div>
+                </div>
+                <div class="valve-info">
+                    <h3>Холодный вход</h3>
+                    <div class="info-row">
+                        <span class="label">Открытие:</span>
+                        <span class="value" id="valveCold-value">50%</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Температура:</span>
+                        <span class="value" id="inputColdTemp-value">15 °C</span>
+                    </div>
+                    <div class="buttons">
+                        <button class="btn-edit" data-target="valveCold" data-type="percent">Изменить %</button>
+                        <!-- <button class="btn-edit" data-target="inputColdTemp" data-type="temp">Изменить T°</button> -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЦЕНТР: БОЙЛЕР -->
+        <section class="boiler-section">
+            <div class="warning-banner" id="warningBanner">
+                <span class="warning-icon">⚠️</span>
+                <span class="warning-text">Достигнут критический уровень!</span>
+            </div>
+            <div class="boiler-container">
+                <svg viewBox="0 0 500 500" class="boiler-svg" preserveAspectRatio="xMidYMid meet">
+                    <!-- Трубы слева (вход) -->
+                    <g class="pipes">
+                        <!-- Горячая труба -->
+                        <path d="M 0 150 L 150 150" class="pipe hot-pipe" />
+                        <path d="M 0 150 L 150 150" class="pipe-flow hot-flow" />
+                        <!-- Холодная труба -->
+                        <path d="M 0 350 L 150 350" class="pipe cold-pipe" />
+                        <path d="M 0 350 L 150 350" class="pipe-flow cold-flow" />
+                        <!-- Выходная труба -->
+                        <path d="M 350 250 L 500 250" class="pipe out-pipe" />
+                        <path d="M 350 250 L 500 250" class="pipe-flow out-flow" />
+                    </g>
+
+                    <!-- Корпус бойлера -->
+                    <g class="boiler-body">
+                        <rect x="150" y="100" width="200" height="300" rx="20" class="tank"/>
+                        <!-- Уровень воды (заполнение снизу) -->
+                        <clipPath id="tankClip">
+                            <rect x="155" y="105" width="190" height="290" rx="17"/>
+                        </clipPath>
+                        <g clip-path="url(#tankClip)">
+                            <rect id="waterLevel" x="155" y="395" width="190" height="0" class="water"/>
+                            <!-- Волны на поверхности воды -->
+                            <path id="waterWave" class="wave" d=""/>
+                        </g>
+                    </g>
+
+                    <!-- Индикатор температуры внутри бака -->
+                    <g class="temp-indicator">
+                        <rect x="230" y="180" width="40" height="140" rx="20" class="thermometer"/>
+                        <rect id="thermoFill" x="237" y="313" width="26" height="0" class="thermo-fill"/>
+                        <circle cx="250" cy="320" r="18" class="thermo-bulb"/>
+                        <text id="tempText" x="250" y="160" text-anchor="middle" class="temp-text">-- °C</text>
+                    </g>
+
+                    <!-- Индикатор уровня сбоку -->
+                    <g class="level-indicator">
+                        <rect x="360" y="120" width="15" height="260" class="level-bar-bg"/>
+                        <rect id="levelBar" x="360" y="380" width="15" height="0" class="level-bar-fill"/>
+                        <text id="levelText" x="367" y="110" text-anchor="middle" class="level-text">0%</text>
+                    </g>
+                </svg>
+            </div>
+        </section>
+
+        <!-- ПРАВАЯ КОЛОНКА: ВЫХОДНОЙ КЛАПАН -->
+        <section class="valves-column right">
+            <div class="valve-card out" data-valve="valveOut">
+                <div class="valve-visual">
+                    <svg viewBox="0 0 80 80" class="valve-icon">
+                        <circle cx="40" cy="40" r="30" class="valve-body"/>
+                        <line x1="40" y1="10" x2="40" y2="70" class="valve-handle"/>
+                        <line x1="10" y1="40" x2="70" y2="40" class="valve-handle"/>
+                    </svg>
+                    <div class="valve-percent" id="valveOut-percent">100%</div>
+                </div>
+                <div class="valve-info">
+                    <h3>Выход (слив)</h3>
+                    <div class="info-row">
+                        <span class="label">Открытие:</span>
+                        <span class="value" id="valveOut-value">100%</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Температура на выходе:</span>
+                        <span class="value" id="outputTemp-value">-- °C</span>
+                    </div>
+                    <div class="buttons">
+                        <button class="btn-edit" data-target="valveOut" data-type="percent">Изменить %</button>
+                        <button class="btn-edit" data-target="outputTemp" data-type="temp">Изменить T°</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- МОДАЛЬНОЕ ОКНО -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modalTitle">Изменить значение</h2>
+                <button class="modal-close" id="modalClose">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="slider-container">
+                    <input type="range" id="modalSlider" min="0" max="100" value="50" step="1">
+                    <div class="slider-value">
+                        <span id="sliderValue">50</span>
+                        <span id="sliderUnit">%</span>
+                    </div>
+                </div>
+                <div class="slider-range">
+                    <span id="sliderMin">0</span>
+                    <span id="sliderMax">100</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-cancel" id="btnCancel">Отмена</button>
+                <button class="btn btn-apply" id="btnApply">Применить</button>
+            </div>
+        </div>
+    </div>
+    <script src="mock.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
