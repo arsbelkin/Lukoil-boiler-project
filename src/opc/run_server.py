@@ -1,4 +1,3 @@
-
 import time
 from opc_server import OPCBoilerServer
 
@@ -13,3 +12,4 @@ if __name__ == "__main__":
         print("Остановка сервера...")
     finally:
         server.stop()
+        

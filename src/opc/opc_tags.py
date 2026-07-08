@@ -1,4 +1,4 @@
-#список тегов
+# список тегов
 TAGS = {
     "ValveHotIn":  {"writable": True, "initial": 0.5},   
     "ValveColdIn": {"writable": True, "initial": 0.5},  
