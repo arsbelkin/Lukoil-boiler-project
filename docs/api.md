@@ -74,14 +74,11 @@ Response example:
   - headers :
 ```json
 {
-    "content-type" : "application/json",
+    "content-type" : "image/png",
 }
 ```
 
   - body :
 ```json
-{
-    "tempGraph" : "string",
-    "waterLevelGraph" : "string",
-}
+"graph": "binary"
 ```
