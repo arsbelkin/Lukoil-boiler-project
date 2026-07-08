@@ -25,3 +25,7 @@
 ## Справочная информация
 - [GitFlow](./docs/gitflow.md)
 - [API_DOCS](./docs/api.md)
+- [Пользовательский интерфейс](./docs/ui.md)
+- [Scada](./docs/scada.md)
+- [OPC_DA](./docs/opc_da.md)
+- [OPC_UA](./docs/opc_ua.md)
