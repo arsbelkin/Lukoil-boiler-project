@@ -35,7 +35,6 @@ Response example:
     "inputColdTemp" : "float",
     "outputTemp" : "float",
     "waterLevel" : "float",
-    "outputTemp" : "float",
     "valveHot" : "float",
     "valveCold" : "float",
     "valveOut" : "float",
