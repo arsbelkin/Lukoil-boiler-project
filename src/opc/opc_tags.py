@@ -5,9 +5,9 @@ TAGS = {
     "ValveOut":    {"writable": True, "initial": 1.0},   
 
     # Температуры, °C
-    "InputTempHot":  {"writable": True, "initial": 90.0},  
-    "InputTempCold": {"writable": True, "initial": 10.0}, 
-    "OutputTemp":    {"writable": True, "initial": 25.0},  
+    "InputTempHot":  {"writable": True, "initial": 85.0},  
+    "InputTempCold": {"writable": True, "initial": 15.0}, 
+    "OutputTemp":    {"writable": True, "initial": 0.0},  
 
     # Уровень воды в баке, %
     "WaterLevel": {"writable": True, "initial": 0.0},      

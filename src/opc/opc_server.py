@@ -1,5 +1,5 @@
 from asyncua.sync import Server
-from opc_tags import TAGS
+from opc.opc_tags import TAGS
 
 
 class OPCBoilerServer:

@@ -1,5 +1,5 @@
 import time
-from opc_server import OPCBoilerServer
+from opc import OPCBoilerServer
 
 if __name__ == "__main__":
     server = OPCBoilerServer()          
