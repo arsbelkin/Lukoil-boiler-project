@@ -40,7 +40,12 @@ cd src
 uv run -m opc.run_server
 ```
 
-4. Запустить `модель`
+4. Запустить `api`
+```bash
+uv run uvicorn api.api:app --reload
+```
+
+5. Запустить `модель`
 ```bash
 uv run -m model.run_model
 ```
