@@ -37,7 +37,12 @@ cd src
 
 3. Запустить `opc сервер`
 ```bash
-uv run opc/run_server.py
+uv run -m opc.run_server
+```
+
+4. Запустить `модель`
+```bash
+uv run -m model.run_model
 ```
 
 
