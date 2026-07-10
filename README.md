@@ -19,7 +19,36 @@
 
 ## Запуск
 
-*\#как запустить*
+Для управления виртуальным окружением python используется пакетный менеджер `uv`.
+
+
+> Возможно придется использовать `python -m pip` или `python -m uv`
+
+
+1. Установить `uv`
+```bash
+pip install uv
+```
+
+2. Перейти в директорию `src`
+```bash
+cd src
+```
+
+3. Запустить `opc сервер`
+```bash
+uv run -m opc.run_server
+```
+
+4. Запустить `api`
+```bash
+uv run uvicorn api.api:app --reload
+```
+
+5. Запустить `модель`
+```bash
+uv run -m model.run_model
+```
 
 
 ## Справочная информация
