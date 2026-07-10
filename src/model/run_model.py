@@ -28,9 +28,9 @@ def start():
                 time.sleep(1)
                 continue
 
-            model.valveHot = client.get_value("ValveHotIn")
-            model.valveCold = client.get_value("ValveColdIn")
-            model.valveOut = client.get_value("ValveOut")
+            model.valveHot = client.get_value("ValveHotIn") / 100
+            model.valveCold = client.get_value("ValveColdIn") / 100
+            model.valveOut = client.get_value("ValveOut") / 100
 
             model.inputHotTemp = 85.0
             model.inputColdTemp = 15.0

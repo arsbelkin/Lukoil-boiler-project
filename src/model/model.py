@@ -4,7 +4,7 @@ class BoilerModel:
 
         self.inputHotTemp = inputHotTemp
         self.inputColdTemp = inputColdTemp
-        self.outputTemp = 0.0
+        self.outputTemp = 25.0
 
         self.waterLevel = 0.0
 
@@ -23,7 +23,7 @@ class BoilerModel:
 
         if total_mass > 0 and incoming > 0:
             mixed_temp = (in_hot * self.inputHotTemp + in_cold * self.inputColdTemp) / (
-                incoming + 1e16
+                incoming + 1e-6
             )
 
             self.outputTemp = (self.outputTemp * old_volume + mixed_temp * incoming) / (
