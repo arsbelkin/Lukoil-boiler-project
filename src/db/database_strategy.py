@@ -273,7 +273,7 @@ def create_database_strategy(db_type: str) -> DatabaseStrategy:
     Returns:
         Экземпляр соответствующей стратегии
     """
-    from config import Config
+    from db.config import Config
     
     if db_type == 'postgresql':
         return PostgreSQLStrategy(Config.POSTGRES_CONFIG)

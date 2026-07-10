@@ -1,7 +1,7 @@
 from asyncua.sync import Client
 import time
-from config import Config
-from database_strategy import DatabaseContext, create_database_strategy
+from db.config import Config
+from db.database_strategy import DatabaseContext, create_database_strategy
 
 
 def main():
