@@ -50,6 +50,13 @@ uv run uvicorn api.api:app --reload
 uv run -m model.run_model
 ```
 
+6. Создать файл `.env` и заполнить его данными по аналогии с `.env.example`
+
+7. Запустить `логгер`
+```bash
+uv run -m db.history_logger
+```
+
 
 ## Справочная информация
 - [GitFlow](./docs/gitflow.md)
