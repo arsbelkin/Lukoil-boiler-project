@@ -51,7 +51,7 @@ class SQLiteStrategy(DatabaseStrategy):
     
     def __init__(self, db_file: str):
         self.db_file = db_file
-        self.conn = None
+        self.conn: sqlite3.Connection
         self._connect()
         print(f"✅ SQLite стратегия инициализирована (файл: {db_file})")
     
@@ -142,7 +142,7 @@ class PostgreSQLStrategy(DatabaseStrategy):
     
     def __init__(self, config: Dict[str, str]):
         self.config = config
-        self.conn = None
+        self.conn: sqlite3.Connection
         self._connect()
         print(f"✅ PostgreSQL стратегия инициализирована (база: {config['dbname']})")
     
