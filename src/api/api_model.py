@@ -1,6 +1,5 @@
 from pydantic import BaseModel
 
-
 convert_map = {
     "inputHotTemp": "InputTempHot",
     "inputColdTemp": "InputTempCold",

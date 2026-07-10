@@ -8,7 +8,7 @@ class OPCBoilerClient:
 
     def connect(self):
         self.client.connect()
-        
+
         boiler = self.client.get_root_node().get_child(["0:Objects", "2:Boiler"])
 
         for v in boiler.get_variables():
@@ -34,4 +34,3 @@ class OPCBoilerClient:
             "valveCold": self.nodes["ValveColdIn"].get_value(),
             "valveOut": self.nodes["ValveOut"].get_value(),
         }
-    

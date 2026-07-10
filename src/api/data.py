@@ -9,4 +9,3 @@ class BoilerData(BaseModel):
     valveHot: float = 50
     valveCold: float = 50
     valveOut: float = 50
-    
