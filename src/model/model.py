@@ -8,14 +8,14 @@ class BoilerModel:
 
         self.waterLevel = 0.0
 
-        self.valveHot = 0.5
-        self.valveCold = 0.5
-        self.valveOut = 1.0
+        self.valveHot = 50.0
+        self.valveCold = 50.0
+        self.valveOut = 100.0
 
     def step(self, dt=1.0):
-        in_hot = self.valveHot * dt
-        in_cold = self.valveCold * dt
-        out = self.valveOut * dt
+        in_hot = self.valveHot / 100 * dt
+        in_cold = self.valveCold / 100 * dt
+        out = self.valveOut / 100 * dt
 
         old_volume = self.waterLevel
         incoming = in_hot + in_cold

@@ -14,9 +14,9 @@ def start():
         client.set_value("StartSimulation", True)
         print("Моделирование запущено (StartSimulation = True)")
 
-        model.valveHot = 0.5
-        model.valveCold = 0.5
-        model.valveOut = 1.0
+        model.valveHot = 50.0
+        model.valveCold = 50.0
+        model.valveOut = 100.0
 
         client.set_value("ValveHotIn", model.valveHot)
         client.set_value("ValveColdIn", model.valveCold)
@@ -28,9 +28,9 @@ def start():
                 time.sleep(1)
                 continue
 
-            model.valveHot = client.get_value("ValveHotIn") / 100
-            model.valveCold = client.get_value("ValveColdIn") / 100
-            model.valveOut = client.get_value("ValveOut") / 100
+            model.valveHot = client.get_value("ValveHotIn")
+            model.valveCold = client.get_value("ValveColdIn")
+            model.valveOut = client.get_value("ValveOut")
 
             model.inputHotTemp = 85.0
             model.inputColdTemp = 15.0

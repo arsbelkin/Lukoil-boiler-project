@@ -13,16 +13,6 @@ app = FastAPI()
 client = OPCBoilerClient()
 client.connect()
 
-convert_map = {
-            "inputHotTemp": "InputTempHot",
-            "inputColdTemp": "InputTempCold",
-            "outputTemp": "OutputTemp",
-            "waterLevel": "WaterLevel",
-            "valveHot": "ValveHotIn",
-            "valveCold": "ValveColdIn",
-            "valveOut": "ValveOut",
-        }
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 app.mount("/ui", StaticFiles(directory=BASE_DIR / "ui"), name="ui")
@@ -41,5 +31,5 @@ def get_data():
 
 @app.post("/api/v1/data")
 def set_value(dto: SetValueDTO):
-    client.set_value(convert_map[dto.name], dto.value)
+    client.set_value(dto.get_name(), dto.value)
     return status.HTTP_200_OK
