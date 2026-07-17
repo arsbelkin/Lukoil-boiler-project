@@ -42,7 +42,7 @@ uv run -m opc.run_server
 
 4. Запустить `api`
 ```bash
-uv run uvicorn api.api:app --reload
+uv run uvicorn api.api_server:app --reload
 ```
 
 5. Запустить `модель`
