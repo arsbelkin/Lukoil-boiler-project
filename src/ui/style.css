@@ -68,6 +68,8 @@ body {
 .valve-card.cold { border-left-color: var(--color-cold); }
 .valve-card.out { border-left-color: var(--color-mixed); }
 
+.valve-card.graph { border-left-color: var(--color-hot); }
+
 .valve-visual {
     display: flex;
     align-items: center;
@@ -138,6 +140,14 @@ body {
 .btn-edit:hover { background: #34495e; }
 .btn-edit:active { transform: scale(0.97); }
 
+/* ===== ПРАВАЯ КОЛОНКА (клапан + график) =====
+.right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 50%;
+}  */
+
 /* ===== БОЙЛЕР ===== */
 .boiler-section {
     display: flex;
@@ -153,6 +163,22 @@ body {
     max-width: 500px;
 }
 .boiler-svg { width: 100%; height: auto; display: block; }
+
+.graph-section {
+    background: var(--color-card);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    border-left: 5px solid var(--color-accent);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* .graph-section:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+} */
+
+.graph-section.out { border-left-color: var(--color-cold); }
 
 /* Трубы */
 .pipe {
@@ -361,6 +387,10 @@ body {
     }
     .valve-card { flex: 1; min-width: 280px; max-width: 400px; }
     .boiler-section { order: -1; }
+
+    /* Правая колонка (клапан + график) всегда отдельным вертикальным блоком
+    .right-column { flex-direction: column; width: 100%; }
+    .graph-section { width: 100%; } */
 }
 @media (max-width: 767px) {
     .header h1 { font-size: 18px; }
@@ -368,6 +398,7 @@ body {
     .valve-card { min-width: 100%; }
     .buttons { flex-direction: column; }
     .btn-edit { width: 100%; }
+    .right-column { width: 100%; }
 }
 
 /* ===== ПРЕДУПРЕЖДЕНИЕ О КРИТИЧЕСКОМ УРОВНЕ ===== */
@@ -411,7 +442,7 @@ body {
 }
 
 .boiler-section {
-    position: relative; /* нужно для позиционирования баннера */
+    position: relative;  /*нужно для позиционирования баннера */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -422,4 +453,4 @@ body {
         font-size: 13px;
         padding: 10px 16px;
     }
-}
+} 
