@@ -27,13 +27,13 @@ def main():
 
         # Получаем узлы бойлера
         boiler = client.get_root_node().get_child(["0:Objects", "2:Boiler"])
-        input_temp_hot = boiler.get_child("2:InputTempHot")
-        input_temp_cold = boiler.get_child("2:InputTempCold")
-        valve_hot = boiler.get_child("2:ValveHotIn")
-        valve_cold = boiler.get_child("2:ValveColdIn")
-        valve_out = boiler.get_child("2:ValveOut")
-        output_temp = boiler.get_child("2:OutputTemp")
-        water_level = boiler.get_child("2:WaterLevel")
+        input_temp_hot = boiler.get_child("2:inputHotTemp")
+        input_temp_cold = boiler.get_child("2:inputColdTemp")
+        valve_hot = boiler.get_child("2:valveHot")
+        valve_cold = boiler.get_child("2:valveCold")
+        valve_out = boiler.get_child("2:valveOut")
+        output_temp = boiler.get_child("2:outputTemp")
+        water_level = boiler.get_child("2:waterLevel")
 
         print("📊 Логгер готов к работе...")
         print("Нажмите Ctrl+C для остановки\n")

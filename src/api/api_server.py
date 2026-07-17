@@ -35,8 +35,12 @@ def get_data():
 
 @app.post("/api/v1/data")
 def set_value(dto: SetValueDTO):
-    client.set_value(dto.get_name(), dto.value)
-    return status.HTTP_200_OK
+    try:
+        client.set_value(dto.name, dto.value)
+        return status.HTTP_200_OK
+    except Exception as e:
+        print(e)
+        return status.HTTP_400_BAD_REQUEST
 
 
 @app.get("/api/v1/graph")

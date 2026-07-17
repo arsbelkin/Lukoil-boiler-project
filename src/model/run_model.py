@@ -18,9 +18,9 @@ def start():
         model.valveCold = 50.0
         model.valveOut = 100.0
 
-        client.set_value("ValveHotIn", model.valveHot)
-        client.set_value("ValveColdIn", model.valveCold)
-        client.set_value("ValveOut", model.valveOut)
+        client.set_value("valveHot", model.valveHot)
+        client.set_value("valveCold", model.valveCold)
+        client.set_value("valveOut", model.valveOut)
 
         while True:
             if not client.get_value("StartSimulation"):
@@ -28,19 +28,19 @@ def start():
                 time.sleep(1)
                 continue
 
-            model.valveHot = client.get_value("ValveHotIn")
-            model.valveCold = client.get_value("ValveColdIn")
-            model.valveOut = client.get_value("ValveOut")
+            model.valveHot = client.get_value("valveHot")
+            model.valveCold = client.get_value("valveCold")
+            model.valveOut = client.get_value("valveOut")
 
             model.inputHotTemp = 85.0
             model.inputColdTemp = 15.0
 
             model.step()
 
-            client.set_value("InputTempHot", model.inputHotTemp)
-            client.set_value("InputTempCold", model.inputColdTemp)
-            client.set_value("OutputTemp", model.outputTemp)
-            client.set_value("WaterLevel", model.get_waterLevelPercent())
+            client.set_value("inputHotTemp", model.inputHotTemp)
+            client.set_value("inputColdTemp", model.inputColdTemp)
+            client.set_value("outputTemp", model.outputTemp)
+            client.set_value("waterLevel", model.get_waterLevelPercent())
 
             time.sleep(1)
 
