@@ -3,7 +3,7 @@ from .valve import ValveModel, ValveOptions
 
 
 class BoilerModel:
-    def __init__(self, opt: BoilerOptions|None=None):
+    def __init__(self, opt: BoilerOptions | None = None):
         if opt is None:
             opt = BoilerOptions()
 
@@ -25,13 +25,12 @@ class BoilerModel:
 
         self.flowSpeed = opt.flowSpeed
 
-
     def step(self):
         self.stepValve()
 
-        in_hot = self.valveHot.level / 100 * self.dt
-        in_cold = self.valveCold.level / 100 * self.dt
-        out = self.valveOut.level / 100 * self.dt
+        in_hot = self.valveHot.level / 100 * self.flowSpeed * self.dt
+        in_cold = self.valveCold.level / 100 * self.flowSpeed * self.dt
+        out = self.valveOut.level / 100 * self.flowSpeed * self.dt
 
         old_volume = self.waterLevel
         incoming = in_hot + in_cold

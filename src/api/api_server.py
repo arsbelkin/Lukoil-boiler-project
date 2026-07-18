@@ -50,18 +50,17 @@ def get_graph():
     return Response(content=g.getvalue(), media_type="image/png")
 
 
-
 def create_graph():
     X = np.linspace(-7, 17, 10000)
-    Y1 = X ** 2
-    Y2 = X ** 3
+    Y1 = X**2
+    Y2 = X**3
 
     fig, ax = plt.subplots(nrows=2, ncols=1)
     ax[0].plot(X, Y1)
     ax[1].plot(X, Y2)
 
     buf = io.BytesIO()
-    fig.savefig(buf, format="png", bbox_inches='tight')
+    fig.savefig(buf, format="png", bbox_inches="tight")
 
     plt.close(fig)
 
