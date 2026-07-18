@@ -81,7 +81,6 @@ class PostgreSQLStrategy(DatabaseStrategy):
 
         print("📊 Таблицы PostgreSQL очищены")
 
-
     def log_data(self, data: Dict[str, Any]):
         """Запись данных в PostgreSQL"""
         try:
