@@ -2,7 +2,6 @@ import time
 
 from db.config import Config
 from db.db_repository import DatabaseRepositoryPattern
-from .fabric import FabricDBStategy
 
 from opc.opc_client import OPCBoilerClient
 
@@ -12,8 +11,7 @@ def main():
     print(f"🚀 Запуск логгера с базой данных: {db_type.upper()}")
     print("=" * 60)
 
-    strategy = FabricDBStategy(db_type)
-    db = DatabaseRepositoryPattern(strategy)
+    db = DatabaseRepositoryPattern()
 
     db.init_tables()
 
