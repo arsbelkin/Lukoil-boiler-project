@@ -24,7 +24,7 @@ class PIDControllerModel:
     def compute(self):
         if self.dt <= 0:
             return self.output_limits[0]
-        
+
         setpoint = self.client.get_value("outputTemp")
         measurement = self.client.get_value("realOutputTemp")
 

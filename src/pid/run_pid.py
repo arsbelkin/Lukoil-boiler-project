@@ -10,7 +10,9 @@ def start():
         print("pid подключен")
 
         while True:
-            if not (pid.client.get_value("StartSimulation") and pid.client.get_value("PID")):
+            if not (
+                pid.client.get_value("StartSimulation") and pid.client.get_value("PID")
+            ):
                 pid.reset()
                 time.sleep(1)
                 continue
