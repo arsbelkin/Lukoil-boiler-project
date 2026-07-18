@@ -24,7 +24,10 @@ def get_data():
 @router.post("/api/v1/data")
 def set_value(dto: SetValueDTO):
     try:
+        client.set_value("PID", dto.name == "outputTemp")
+
         client.set_value(dto.name, dto.value)
+        
         return status.HTTP_200_OK
     except Exception as e:
         print(e)

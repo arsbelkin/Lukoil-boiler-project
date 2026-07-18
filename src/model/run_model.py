@@ -40,7 +40,8 @@ def start():
 
             client.set_value("inputHotTemp", model.inputHotTemp)
             client.set_value("inputColdTemp", model.inputColdTemp)
-            client.set_value("outputTemp", model.outputTemp)
+            client.set_value("realOutputTemp", model.outputTemp)
+            
             client.set_value("waterLevel", model.get_waterLevelPercent())
 
             time.sleep(1)
