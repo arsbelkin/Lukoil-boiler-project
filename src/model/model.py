@@ -1,21 +1,37 @@
+from .optionsBoiler import BoilerOptions
+from .valve import ValveModel, ValveOptions
+
+
 class BoilerModel:
-    def __init__(self, max_volume=100.0, inputHotTemp=85.0, inputColdTemp=15.0):
-        self.max_volume = max_volume
+    def __init__(self, opt: BoilerOptions|None=None):
+        if opt is None:
+            opt = BoilerOptions()
 
-        self.inputHotTemp = inputHotTemp
-        self.inputColdTemp = inputColdTemp
-        self.outputTemp = 25.0
+        self.max_volume = opt.max_volume
 
-        self.waterLevel = 0.0
+        self.dt = opt.dt
 
-        self.valveHot = 50.0
-        self.valveCold = 50.0
-        self.valveOut = 100.0
+        self.inputHotTemp = opt.inputHotTemp
+        self.inputColdTemp = opt.inputColdTemp
+        self.outputTemp = opt.outputTemp
 
-    def step(self, dt=1.0):
-        in_hot = self.valveHot / 100 * dt
-        in_cold = self.valveCold / 100 * dt
-        out = self.valveOut / 100 * dt
+        self.targetOutputTemp = opt.outputTemp
+
+        self.waterLevel = opt.waterLevel
+
+        self.valveHot = ValveModel(ValveOptions(level=opt.valveHot, dt=opt.dt))
+        self.valveCold = ValveModel(ValveOptions(level=opt.valveCold, dt=opt.dt))
+        self.valveOut = ValveModel(ValveOptions(level=opt.valveOut, dt=opt.dt))
+
+        self.flowSpeed = opt.flowSpeed
+
+
+    def step(self):
+        self.stepValve()
+
+        in_hot = self.valveHot.level / 100 * self.dt
+        in_cold = self.valveCold.level / 100 * self.dt
+        out = self.valveOut.level / 100 * self.dt
 
         old_volume = self.waterLevel
         incoming = in_hot + in_cold
@@ -32,6 +48,11 @@ class BoilerModel:
 
         delta = incoming - out
         self.waterLevel = max(0.0, min(old_volume + delta, self.max_volume))
+
+    def stepValve(self):
+        self.valveHot.step()
+        self.valveCold.step()
+        self.valveOut.step()
 
     def get_waterLevelPercent(self):
         return (self.waterLevel / self.max_volume) * 100.0

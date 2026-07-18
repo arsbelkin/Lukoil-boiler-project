@@ -14,13 +14,13 @@ def start():
         client.set_value("StartSimulation", True)
         print("Моделирование запущено (StartSimulation = True)")
 
-        model.valveHot = 50.0
-        model.valveCold = 50.0
-        model.valveOut = 100.0
+        client.set_value("valveHot", model.valveHot.targetLevel)
+        client.set_value("valveCold", model.valveCold.targetLevel)
+        client.set_value("valveOut", model.valveOut.targetLevel)
 
-        client.set_value("valveHot", model.valveHot)
-        client.set_value("valveCold", model.valveCold)
-        client.set_value("valveOut", model.valveOut)
+        client.set_value("realValveHot", model.valveHot.level)
+        client.set_value("realValveCold", model.valveCold.level)
+        client.set_value("realValveOut", model.valveOut.level)
 
         while True:
             if not client.get_value("StartSimulation"):
@@ -28,14 +28,15 @@ def start():
                 time.sleep(1)
                 continue
 
-            model.valveHot = client.get_value("valveHot")
-            model.valveCold = client.get_value("valveCold")
-            model.valveOut = client.get_value("valveOut")
-
-            model.inputHotTemp = 85.0
-            model.inputColdTemp = 15.0
+            model.valveHot.targetLevel = client.get_value("valveHot")
+            model.valveCold.targetLevel = client.get_value("valveCold")
+            model.valveOut.targetLevel = client.get_value("valveOut")
 
             model.step()
+
+            client.set_value("realValveHot", model.valveHot.level)
+            client.set_value("realValveCold", model.valveCold.level)
+            client.set_value("realValveOut", model.valveOut.level)
 
             client.set_value("inputHotTemp", model.inputHotTemp)
             client.set_value("inputColdTemp", model.inputColdTemp)

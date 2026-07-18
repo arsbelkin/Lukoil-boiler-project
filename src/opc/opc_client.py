@@ -30,7 +30,7 @@ class OPCBoilerClient:
             "inputColdTemp": self.nodes["inputColdTemp"].get_value(),
             "outputTemp": self.nodes["outputTemp"].get_value(),
             "waterLevel": self.nodes["waterLevel"].get_value(),
-            "valveHot": self.nodes["valveHot"].get_value(),
-            "valveCold": self.nodes["valveCold"].get_value(),
-            "valveOut": self.nodes["valveOut"].get_value(),
+            "valveHot": self.nodes["realValveHot"].get_value(),
+            "valveCold": self.nodes["realValveCold"].get_value(),
+            "valveOut": self.nodes["realValveOut"].get_value(),
         }

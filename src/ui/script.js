@@ -268,8 +268,8 @@ $('btnApply').addEventListener('click', async () => {
     const ok = await sendValue(target, value);
     if (ok) {
         // Сразу обновляем локально для отзывчивости
-        state[target] = value;
-        render();
+        // state[target] = value;
+        // render();
         closeModal();
     }
 });
