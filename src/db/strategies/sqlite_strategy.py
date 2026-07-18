@@ -72,13 +72,13 @@ class SQLiteStrategy(DatabaseStrategy):
             """,
                 (
                     datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                    data["input_temp_hot"],
-                    data["input_temp_cold"],
-                    data["valve_hot"],
-                    data["valve_cold"],
-                    data["valve_out"],
-                    data["output_temp"],
-                    data["water_level"],
+                    data["inputHotTemp"],
+                    data["inputColdTemp"],
+                    data["valveHot"],
+                    data["valveCold"],
+                    data["valveOut"],
+                    data["outputTemp"],
+                    data["waterLevel"],
                 ),
             )
             self.conn.commit()

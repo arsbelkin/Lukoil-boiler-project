@@ -7,7 +7,6 @@ from opc import OPCBoilerClient
 
 from pathlib import Path
 
-
 client = OPCBoilerClient()
 BASE_DIR = Path(__file__).resolve().parent.parent
 

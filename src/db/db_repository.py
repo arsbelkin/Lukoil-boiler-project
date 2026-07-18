@@ -3,9 +3,7 @@ from typing import Dict, Any, List
 from .strategies.abs_strategy import DatabaseStrategy
 
 
-class DatabaseContext:
-    """Контекст, который использует стратегию"""
-
+class DatabaseRepositoryPattern:
     def __init__(self, strategy: DatabaseStrategy):
         self._strategy = strategy
 

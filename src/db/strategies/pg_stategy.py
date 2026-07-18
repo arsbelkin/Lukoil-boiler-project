@@ -25,14 +25,14 @@ class PostgreSQLStrategy(DatabaseStrategy):
 
         print(f"✅ PostgreSQL стратегия инициализирована (база: {config['dbname']})")
 
-    def  _connect(self):
+    def _connect(self):
         """Подключение к PostgreSQL"""
         if not POSTGRES_AVAILABLE:
             print("❌psycopg2 не установлен. Переключитесь на SQLite в .env файле")
             sys.exit(1)
 
         try:
-            self.conn = psycopg2.connect(**self.config) # type: ignore
+            self.conn = psycopg2.connect(**self.config)  # type: ignore
             self.conn.autocommit = False
         except Exception as e:
             print(f"⚠️  Не удалось подключиться к PostgreSQL: {e}")
@@ -82,13 +82,13 @@ class PostgreSQLStrategy(DatabaseStrategy):
                 VALUES (NOW(), %s, %s, %s, %s, %s, %s, %s)
             """,
                 (
-                    data["input_temp_hot"],
-                    data["input_temp_cold"],
-                    data["valve_hot"],
-                    data["valve_cold"],
-                    data["valve_out"],
-                    data["output_temp"],
-                    data["water_level"],
+                    data["inputHotTemp"],
+                    data["inputColdTemp"],
+                    data["valveHot"],
+                    data["valveCold"],
+                    data["valveOut"],
+                    data["outputTemp"],
+                    data["waterLevel"],
                 ),
             )
             self.conn.commit()
