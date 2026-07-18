@@ -44,7 +44,7 @@ def main():
                 f"Level={data['waterLevel']:.1f}%"
             )
 
-            time.sleep(3)
+            time.sleep(2)
 
     except KeyboardInterrupt:
         print("\n⏹️  Остановка логгера по команде пользователя...")
