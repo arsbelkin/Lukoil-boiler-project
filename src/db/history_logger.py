@@ -1,23 +1,20 @@
 from asyncua.sync import Client
 import time
 from db.config import Config
-from db.database_strategy import DatabaseContext, create_database_strategy
+from db.db_context import DatabaseContext
+from .fabric import FabricDBStategy
 
 
 def main():
-    # Определяем тип БД из конфигурации
     db_type = Config.get_db_type()
     print(f"🚀 Запуск логгера с базой данных: {db_type.upper()}")
     print("=" * 60)
 
-    # Создаём стратегию и контекст
-    strategy = create_database_strategy(db_type)
+    strategy = FabricDBStategy(db_type)
     db = DatabaseContext(strategy)
 
-    # Инициализируем таблицы (создаём если нет)
     db.init_tables()
 
-    # Подключение к OPC UA серверу
     client = Client("opc.tcp://localhost:4840/freeopcua/server/")
 
     try:
@@ -25,7 +22,6 @@ def main():
         print("✅ Исторический логгер подключён к OPC UA")
         print("=" * 60)
 
-        # Получаем узлы бойлера
         boiler = client.get_root_node().get_child(["0:Objects", "2:Boiler"])
         input_temp_hot = boiler.get_child("2:inputHotTemp")
         input_temp_cold = boiler.get_child("2:inputColdTemp")
@@ -39,7 +35,6 @@ def main():
         print("Нажмите Ctrl+C для остановки\n")
 
         while True:
-            # Читаем значения из OPC UA
             data = {
                 "input_temp_hot": input_temp_hot.get_value(),
                 "input_temp_cold": input_temp_cold.get_value(),
@@ -50,10 +45,8 @@ def main():
                 "water_level": water_level.get_value(),
             }
 
-            # Записываем в БД
             db.log_data(data)
 
-            # Выводим в консоль
             print(
                 f"💾 Запись: "
                 f"T_hot={data['input_temp_hot']:.1f}°C, "
@@ -65,7 +58,7 @@ def main():
                 f"Level={data['water_level']:.1f}%"
             )
 
-            time.sleep(5)
+            time.sleep(3)
 
     except KeyboardInterrupt:
         print("\n⏹️  Остановка логгера по команде пользователя...")
