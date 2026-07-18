@@ -1,4 +1,4 @@
-from model import BoilerModel
+from .model import BoilerModel
 from opc import OPCBoilerClient
 import time
 
