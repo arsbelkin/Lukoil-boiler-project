@@ -59,6 +59,17 @@ class SQLiteStrategy(DatabaseStrategy):
         self.conn.commit()
         print(" Таблицы SQLite созданы/проверены")
 
+    def drop_tables(self):
+        cursor = self.conn.cursor()
+
+        cursor.execute("""
+                       DROP TABLE IF EXISTS boiler_history;
+                       """)
+
+        self.conn.commit()
+
+        print("📊 Таблицы SQLite очищены")
+
     def log_data(self, data: Dict[str, Any]):
         """Запись данных в SQLite"""
         try:

@@ -13,6 +13,9 @@ class DatabaseRepositoryPattern:
 
         self._strategy = strategy
 
+        if Config.CLEAR_TABLES:
+            self._strategy.drop_tables()
+
     def _init_strategy(self) -> DatabaseStrategy:
         db_type = Config.get_db_type()
 

@@ -1,9 +1,8 @@
 from .api_server import BASE_DIR, client
 from .api_model import SetValueDTO
 
-from fastapi import APIRouter, Response
+from fastapi import APIRouter, Response, status, HTTPException
 from fastapi.responses import FileResponse
-from fastapi import status
 
 from .graph import plot_graph
 
@@ -21,17 +20,21 @@ def get_data():
     return client.get_data()
 
 
-@router.post("/api/v1/data")
+@router.post("/api/v1/data", status_code=status.HTTP_200_OK, response_class=Response)
 def set_value(dto: SetValueDTO):
     try:
         client.set_value("PID", dto.name == "outputTemp")
 
         client.set_value(dto.name, dto.value)
 
-        return status.HTTP_200_OK
+        return Response()
+
     except Exception as e:
-        print(e)
-        return status.HTTP_400_BAD_REQUEST
+        print(f"API: {e}")
+
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Ошибка установки значения"
+        )
 
 
 @router.get("/api/v1/graph")

@@ -11,6 +11,11 @@ class DatabaseStrategy(ABC):
         pass
 
     @abstractmethod
+    def drop_tables(self):
+        """Очищает таблицы"""
+        pass
+
+    @abstractmethod
     def log_data(self, data: Dict[str, Any]):
         """Записывает данные в БД"""
         pass

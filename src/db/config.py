@@ -19,6 +19,8 @@ class Config:
 
     SQLITE_DB_FILE = os.getenv("SQLITE_DB_FILE", "boiler.db")
 
+    CLEAR_TABLES = os.getenv("CLEAR_TABLES", "False") == "True"
+
     @classmethod
     def get_db_type(cls):
         """Возвращает тип используемой БД"""

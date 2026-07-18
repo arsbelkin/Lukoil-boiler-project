@@ -70,6 +70,18 @@ class PostgreSQLStrategy(DatabaseStrategy):
         self.conn.commit()
         print("📊 Таблицы PostgreSQL созданы/проверены")
 
+    def drop_tables(self):
+        cursor = self.conn.cursor()
+
+        cursor.execute("""
+                       DROP TABLE IF EXISTS boiler_history;
+                       """)
+
+        self.conn.commit()
+
+        print("📊 Таблицы PostgreSQL очищены")
+
+
     def log_data(self, data: Dict[str, Any]):
         """Запись данных в PostgreSQL"""
         try:
