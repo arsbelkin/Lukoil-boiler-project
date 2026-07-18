@@ -48,10 +48,13 @@ def main():
 
     except KeyboardInterrupt:
         print("\n⏹️  Остановка логгера по команде пользователя...")
+
+        client.disconnect()
     except Exception as e:
         print(f"❌ Ошибка логгера: {e}")
-    finally:
+
         client.disconnect()
+    finally:
         db.close()
         print("🔌 Логгер остановлен. Соединения закрыты.")
 

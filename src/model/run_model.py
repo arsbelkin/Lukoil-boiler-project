@@ -47,11 +47,12 @@ def start():
 
     except KeyboardInterrupt:
         print("остановка модели")
+
+        client.set_value("StartSimulation", False)
+        client.disconnect()
     except Exception as e:
         print(e)
     finally:
-        client.set_value("StartSimulation", False)
-        client.disconnect()
         print("opc клиент отключен")
 
 
