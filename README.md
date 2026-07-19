@@ -67,6 +67,7 @@ uv run -m db.history_logger
 
 ## Справочная информация
 - [GitFlow](./docs/gitflow.md)
+- [GitHubFlow](./docs/github-flow.md)
 - [API_DOCS](./docs/api.md)
 - [Пользовательский интерфейс](./docs/ui.md)
 - [Scada](./docs/scada.md)
