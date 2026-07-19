@@ -206,7 +206,7 @@ document.querySelectorAll('.btn-edit').forEach(btn => {
             current = state[target];
         } else {
             title = `Температура: ${getDisplayName(target)}`;
-            min = 0; max = 100; unit = '°C';
+            min = state.inputColdTemp; max = state.inputHotTemp; unit = '°C';
             current = state[target];
         }
 
