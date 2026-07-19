@@ -2,6 +2,8 @@
 const API_BASE = '/api/v1';
 const POLL_INTERVAL = 1000; // мс — частота опроса API
 
+const POLL_INTERVAL_GRAPH = 3000; // мс — частота опроса API/Graph
+
 // Состояние приложения
 const state = {
     inputHotTemp: 85,
@@ -31,6 +33,8 @@ const sliderUnit = $('sliderUnit');
 const sliderMin = $('sliderMin');
 const sliderMax = $('sliderMax');
 
+const graph_im = $('graph_img');
+
 // ===== API =====
 async function fetchData() {
     try {
@@ -38,6 +42,24 @@ async function fetchData() {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
         Object.assign(state, data);
+        render();
+        setStatus('connected', '● Подключено');
+    } catch (err) {
+        console.error('Ошибка чтения данных:', err);
+        setStatus('error', '● Ошибка соединения');
+    }
+}
+
+async function fetchGraph() {
+    try {
+        const res = await fetch(`${API_BASE}/graph`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+        const imageBlob = await res.blob();
+        const imageURL = URL.createObjectURL(imageBlob);
+
+        graph_im.src = imageURL;
+
         render();
         setStatus('connected', '● Подключено');
     } catch (err) {
@@ -277,3 +299,6 @@ $('btnApply').addEventListener('click', async () => {
 // ===== ЗАПУСК =====
 fetchData();
 setInterval(fetchData, POLL_INTERVAL);
+
+fetchGraph();
+setInterval(fetchGraph, POLL_INTERVAL_GRAPH);

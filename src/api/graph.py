@@ -21,7 +21,7 @@ def plot_graph(limit: int = 11):
         level_array.append(elem["water_level"])
 
     with style.context("seaborn-v0_8"):
-        fig = Figure(figsize=(10, 8))
+        fig = Figure(figsize=(8, 8))
         ax = fig.subplots(nrows=2, ncols=1)
 
     ax[0].scatter(time_array, temp_array, color="navy", s=35)

@@ -11,7 +11,7 @@ router = APIRouter()
 
 @router.get("/", response_class=FileResponse)
 def index():
-    html_path = BASE_DIR / "ui" / "index.html"
+    html_path = BASE_DIR / "ui" / "template" / "index.html"
     return FileResponse(html_path, media_type="text/html")
 
 

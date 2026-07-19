@@ -13,6 +13,8 @@
     --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
     --radius: 12px;
     --transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --color-graph: #3f81e4;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -60,13 +62,33 @@ body {
     border-radius: var(--radius);
     padding: 20px;
     box-shadow: var(--shadow-sm);
-    border-left: 5px solid var(--color-accent);
+    border-left: 5px solid var(--color-card);
     transition: transform 0.2s, box-shadow 0.2s;
+
+    border-right: 5px solid var(--color-card);
 }
 .valve-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
 .valve-card.hot { border-left-color: var(--color-hot); }
 .valve-card.cold { border-left-color: var(--color-cold); }
-.valve-card.out { border-left-color: var(--color-mixed); }
+.valve-card.out { border-right-color: var(--color-mixed); }
+
+.valve-card.graph {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 8 / 8;   /* или подберите под ваш реальный график */
+    overflow: hidden;
+
+    border-right-color: var(--color-graph);
+}
+
+.graph_class {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;   /* картинка целиком видна, пропорции не искажены */
+    /* object-fit: cover; — если хотите, чтобы график заполнял всю карточку без пустот, обрезая края */
+    display: block;
+}
 
 .valve-visual {
     display: flex;
