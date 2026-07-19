@@ -85,3 +85,4 @@ uv run -m db.history_logger
 - [Scada](./docs/scada.md)
 - [OPC_DA](./docs/opc_da.md)
 - [OPC_UA](./docs/opc_ua.md)
+- [PID-Регулятор](./docs/pid-controller.md)
