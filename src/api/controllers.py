@@ -17,7 +17,14 @@ def index():
 
 @router.get("/api/v1/data")
 def get_data():
-    return client.get_data()
+    try:
+        return client.get_data()
+    except Exception as e:
+        print(f"API: {e}")
+
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Ошибка получения данных"
+        )
 
 
 @router.post("/api/v1/data", status_code=status.HTTP_200_OK, response_class=Response)
@@ -38,7 +45,14 @@ def set_value(dto: SetValueDTO):
 
 
 @router.get("/api/v1/graph")
-def get_graph():
-    g = plot_graph()
+def get_graph(limit: int = 11):
+    try:
+        g = plot_graph(limit=limit)
 
-    return Response(content=g.getvalue(), media_type="image/png")
+        return Response(content=g.getvalue(), media_type="image/png")
+    except Exception as e:
+        print(f"API: {e}")
+
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Ошибка графика"
+        )

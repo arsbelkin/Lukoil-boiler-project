@@ -8,12 +8,12 @@ import io
 db = DatabaseRepositoryPattern()
 
 
-def plot_graph():
+def plot_graph(limit: int = 11):
     time_array = []
     temp_array = []
     level_array = []
 
-    data = db.get_history(11)
+    data = db.get_history(limit)
 
     for elem in data:
         time_array.append(elem["timestamp"])
