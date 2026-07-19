@@ -19,3 +19,5 @@ class BoilerOptions:
     valveSpeed: float = 2.0
 
     dt: float = 1.0
+
+    criticalLevel: float = 95.0

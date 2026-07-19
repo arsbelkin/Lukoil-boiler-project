@@ -34,6 +34,11 @@ def start():
 
             model.step()
 
+            if model.get_waterLevelPercent() > model.criticalLevel:
+                client.set_value("valveHot", 0.0)
+                client.set_value("valveCold", 0.0)
+                client.set_value("valveOut", 100.0)
+
             client.set_value("realValveHot", model.valveHot.level)
             client.set_value("realValveCold", model.valveCold.level)
             client.set_value("realValveOut", model.valveOut.level)

@@ -9,6 +9,8 @@ class BoilerModel:
 
         self.max_volume = opt.max_volume
 
+        self.criticalLevel = opt.criticalLevel
+
         self.dt = opt.dt
 
         self.inputHotTemp = opt.inputHotTemp
