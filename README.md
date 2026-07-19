@@ -50,9 +50,16 @@ uv run uvicorn api.api_server:app --reload
 uv run -m model.run_model
 ```
 
-6. Создать файл `.env` и заполнить его данными по аналогии с `.env.example`
+6. Запустить `pid-регулятор`
+```bash
+uv run -m pid.run_pid
+```
 
-7. Запустить `логгер`
+7. Создать файл `.env` и заполнить его данными по аналогии с `.env.example`
+
+> При использовании PostgreSQL необходимо заранее создать БД
+
+8. Запустить `логгер`
 ```bash
 uv run -m db.history_logger
 ```
