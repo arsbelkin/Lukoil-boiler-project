@@ -38,6 +38,9 @@ class BoilerModel:
         incoming = in_hot + in_cold
         total_mass = old_volume + incoming
 
+        if total_mass < 10e-5:
+            self.outputTemp = 0.0
+
         if total_mass > 0 and incoming > 0:
             mixed_temp = (in_hot * self.inputHotTemp + in_cold * self.inputColdTemp) / (
                 incoming + 1e-6
