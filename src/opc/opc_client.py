@@ -24,6 +24,10 @@ class OPCBoilerClient:
     def set_value(self, tag_name, value):
         self.nodes[tag_name].set_value(value)
 
+    def set_value_with_check(self, tag_name, value):
+        self.nodes["PID"].set_value(tag_name == "outputTemp")
+        self.set_value(tag_name, value)
+
     def get_data(self):
         return {
             "inputHotTemp": self.nodes["inputHotTemp"].get_value(),
@@ -33,4 +37,5 @@ class OPCBoilerClient:
             "valveHot": self.nodes["realValveHot"].get_value(),
             "valveCold": self.nodes["realValveCold"].get_value(),
             "valveOut": self.nodes["realValveOut"].get_value(),
+            "targetOutputTemp": self.nodes["outputTemp"].get_value()
         }

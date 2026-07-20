@@ -13,6 +13,7 @@ const state = {
     valveHot: 50,
     valveCold: 50,
     valveOut: 100,
+    targetOutputTemp: 25,
 };
 
 let warningActive = false;
@@ -34,6 +35,7 @@ const sliderMin = $('sliderMin');
 const sliderMax = $('sliderMax');
 
 const graph_im = $('graph_img');
+const targetTemp = $('tempTextTarget');
 
 // ===== API =====
 async function fetchData() {
@@ -133,6 +135,8 @@ function render() {
     $('thermoFill').setAttribute('height', fillH);
     $('thermoFill').setAttribute('y', thermoBottom - fillH);
     $('tempText').textContent = state.outputTemp.toFixed(1) + ' °C';
+
+    targetTemp.textContent = state.targetOutputTemp.toFixed(1) + ' °C';
 
     // Индикатор уровня сбоку
     const levelBarHeight = 260;

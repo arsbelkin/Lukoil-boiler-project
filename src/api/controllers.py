@@ -30,9 +30,7 @@ def get_data():
 @router.post("/api/v1/data", status_code=status.HTTP_200_OK, response_class=Response)
 def set_value(dto: SetValueDTO):
     try:
-        client.set_value("PID", dto.name == "outputTemp")
-
-        client.set_value(dto.name, dto.value)
+        client.set_value_with_check(dto.name, dto.value)
 
         return Response()
 

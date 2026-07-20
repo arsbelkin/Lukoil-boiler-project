@@ -32,12 +32,17 @@ def start():
             model.valveCold.targetLevel = client.get_value("valveCold")
             model.valveOut.targetLevel = client.get_value("valveOut")
 
+            model.targetOutputTemp = client.get_value("outputTemp")
+
             model.step()
 
             if model.get_waterLevelPercent() > model.criticalLevel:
                 client.set_value("valveHot", 0.0)
                 client.set_value("valveCold", 0.0)
                 client.set_value("valveOut", 100.0)
+
+            if not client.get_value("PID"):
+                client.set_value("outputTemp", model.outputTemp)
 
             client.set_value("realValveHot", model.valveHot.level)
             client.set_value("realValveCold", model.valveCold.level)

@@ -224,6 +224,13 @@ body {
 }
 
 /* Термометр */
+
+.temp-tgt {
+    font-size: 15px;
+    font-weight: 500;
+    fill: #5d5c5d;
+}
+
 .thermometer {
     fill: #ecf0f1;
     stroke: var(--color-accent);
