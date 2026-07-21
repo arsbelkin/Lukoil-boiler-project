@@ -38,6 +38,7 @@ Response example:
     "valveHot" : "float",
     "valveCold" : "float",
     "valveOut" : "float",
+    "targetOutputTemp" : "float"
 }
 ```
 
@@ -67,7 +68,7 @@ Response example: *statusCode*
 <br>
 <br>
 
-- График `GET /api/v1/graph`
+- График `GET /api/v1/graph?limit=11`
 
 Response example:
   - headers :
